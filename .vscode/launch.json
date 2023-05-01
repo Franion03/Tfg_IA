@@ -6,6 +6,7 @@
     "configurations": [
         
         {
+            "args": ["multiple_vinilo_negro_0.bin"],
             "name": "Python: Current File",
             "type": "python",
             "request": "launch",
