@@ -35,7 +35,7 @@ class Load:
         
         # if ext == '.bin':
         #     # Clear previous data
-        hc = []
+        # hc = []
         #     .sghc = []
         #     .badPixelsProcessed = False
             
@@ -45,56 +45,53 @@ class Load:
         #     .badPixels = [] # We don't have bad pixels when loading a .bin file
             
         #     print(f'Loading {.filename}')
-            # Read the binary data
-        dimension = 3
-        forma = (dimension,) * dimension
-        hipercubo = np.zeros(forma, dtype=np.int16)
+        
         # Leer el archivo binario en una matriz hipercubo
-        hipercubo = np.fromfile(filename, dtype=np.int16)
-        numLiness = len(hipercubo) // (numPixels * numBands)
+        hipercubo = np.fromfile(filename, dtype=np.uint16)
 
         # Darle forma al hipercubo
         # hipercubo = hipercubo.reshape(forma)
 
-        with open(filename, 'rb') as f:
-            num_bytes = os.path.getsize(filename)
-
-            # Calculate the number of 16-bit integers in the file
-            num_ints = num_bytes // 2
-
-            # Read in the data using struct
-            data = f.read(num_bytes)
-            bindata = array.array('H', data)
-        
         # with open(filename, 'rb') as f:
-        #     hipercubo = np.fromfile(f, dtype=np.int16)
-        
-        # Convert the binary data to a list of integers
-        bindata = struct.unpack(f'>{len(data)//2}H', data)
-        
-        hc = list(bindata)
-        
-        # Calculate the number of lines
-        numLines = len(hc) // (numPixels * numBands)
-         # Convert the binary data to a 3D array
-        hc = [[[] for _ in range(numBands)] for _ in range(numLines)]
-        for i in range(numLines):
-            for j in range(numBands):
-                for k in range(numPixels):
-                    index = i * numBands * numPixels + j * numPixels + k
-                    hc[i][j].append(bindata[index])
-        
-        # Convert to numpy array for easier manipulation (optional) //TODO: Cambiar todos los int16 por uint 16
-        hc = np.array(hc, dtype=np.int16)
+        #     num_bytes = os.path.getsize(filename)
 
-        # Calculate the number of lines in the data
-        numLines = hc.shape[0]
+        #     # Calculate the number of 16-bit integers in the file
+        #     num_ints = num_bytes // 2
 
-        # Transpose the array so that the first two dimensions define a CubeFrame
-        # and the third dimension represents the spectral bands
-        hc = np.transpose(hc, (0, 2, 1))
+        #     # Read in the data using struct
+        #     data = f.read(num_bytes)
+        #     bindata = array.array('H', data)
+        
+        # # with open(filename, 'rb') as f:
+        # #     hipercubo = np.fromfile(f, dtype=np.uint16)
+        
+        # # Convert the binary data to a list of integers
+        # bindata = struct.unpack(f'>{len(data)//2}H', data)
+        
+        # hc = list(bindata)
+        
+        # # Calculate the number of lines
+        # numLines = len(hc) // (numPixels * numBands)
+        #  # Convert the binary data to a 3D array
+        # hc = [[[] for _ in range(numBands)] for _ in range(numLines)]
+        # for i in range(numLines):
+        #     for j in range(numBands):
+        #         for k in range(numPixels):
+        #             index = i * numBands * numPixels + j * numPixels + k
+        #             hc[i][j].append(bindata[index])
+        
+        # # Convert to numpy array for easier manipulation (optional) //TODO: Cambiar todos los uint16 por uint 16
+        # hc = np.array(hc, dtype=np.uint16)
 
-        valores_a_graficar = hipercubo[2, :, :, :].flatten()
+        # # Calculate the number of lines in the data
+        # numLines = hc.shape[0]
+
+        # # Transpose the array so that the first two dimensions define a CubeFrame
+        # # and the third dimension represents the spectral bands
+        # hc = np.transpose(hc, (0, 2, 1))
+        numLines = len(hipercubo) // (numPixels * numBands)
+        hipercubo = hipercubo.reshape((numLines,numPixels,numBands))
+        valores_a_graficar = hipercubo[2,:, :].flatten()
 
         # Grafica los valores como un histograma
         plt.hist(valores_a_graficar, bins=100)
@@ -104,15 +101,15 @@ class Load:
         plt.show()
 
         # Selecciona una dimensión para visualizar y extrae la matriz correspondiente
-        dim_a_visualizar = 2  # Seleccione la primera dimensión
-        matriz_a_visualizar = hipercubo[dim_a_visualizar, :, :, :]
+        dim_a_visualizar = 0  # Seleccione la primera dimensión
+        matriz_a_visualizar = hipercubo[dim_a_visualizar, :, :]
 
         # Mostrar la matriz como una imagen utilizando la función `imshow`
         plt.imshow(matriz_a_visualizar, cmap='gray')
         plt.title('Visualización de la dimensión {}'.format(dim_a_visualizar))
         plt.show()
 
-        print(hc[1][1][1])
+        print(hipercubo[1][1][1])
 
 
         
