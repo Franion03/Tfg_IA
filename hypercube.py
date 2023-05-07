@@ -90,23 +90,25 @@ class Load:
         # # and the third dimension represents the spectral bands
         # hc = np.transpose(hc, (0, 2, 1))
         numLines = len(hipercubo) // (numPixels * numBands)
-        hipercubo = hipercubo.reshape((numLines,numPixels,numBands))
-        valores_a_graficar = hipercubo[2,:, :].flatten()
+        hipercubo = hipercubo.reshape((numLines,numBands,numPixels)).astype("float")
+        dim_a_visualizar = 150
+        valores_a_graficar = hipercubo[dim_a_visualizar,:,dim_a_visualizar].flatten()
+        plt.plot(hipercubo[dim_a_visualizar,:, dim_a_visualizar])
+        plt.show()
 
         # Grafica los valores como un histograma
-        plt.hist(valores_a_graficar, bins=100)
-        plt.xlabel('Valor')
-        plt.ylabel('Frecuencia')
-        plt.title('Valores en la dimensión {}'.format(2))
+        plt.hist(valores_a_graficar, bins=1000)
+        plt.title('Valores en la dimensión {}'.format(dim_a_visualizar))
         plt.show()
 
         # Selecciona una dimensión para visualizar y extrae la matriz correspondiente
-        dim_a_visualizar = 0  # Seleccione la primera dimensión
-        matriz_a_visualizar = hipercubo[dim_a_visualizar, :, :]
+        dim_a_visualizar = 150
+        matriz_a_visualizar = hipercubo[:, dim_a_visualizar, :]
 
         # Mostrar la matriz como una imagen utilizando la función `imshow`
         plt.imshow(matriz_a_visualizar, cmap='gray')
         plt.title('Visualización de la dimensión {}'.format(dim_a_visualizar))
+        plt.colorbar()
         plt.show()
 
         print(hipercubo[1][1][1])
