@@ -90,6 +90,10 @@ class Hypercube:
     # A function that makes the average of bands in the hipercube
     def average(self):
         self.bidimensionalHipercube = np.mean(self.hipercubo, axis=1,dtype=np.uint16)
+    # A function that keeps in csv roi values giveds from the hipercube in actual path
+    def saveROI(self, roi):
+        np.savetxt(self.basename + ".csv", roi, delimiter=",")
+        
 
 
 
