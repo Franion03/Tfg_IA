@@ -52,14 +52,33 @@ class Hypercube:
         plt.title('Visualización de la dimensión {}'.format(dim_a_visualizar))
         plt.colorbar()
         plt.show()
+    # A function that crops the image to the given dimensions
+    def Crop(self, y1, y2, x1, x2):
+        self.hipercubo = self.hipercubo[:, x1:x2, y1:y2]
+        self.numPixels = x2 - x1
+        self.numLines = y2 - y1
+    # A function that adjust color gamma in x image
+    def imadjust(self,x,a,b,c,d,gamma=1):
+        # Similar to imadjust in MATLAB.
+        # Converts an image range from [a,b] to [c,d].
+        # The Equation of a line can be used for this transformation:
+        #   y=((d-c)/(b-a))*(x-a)+c
+        # However, it is better to use a more generalized equation:
+        #   y=((x-a)/(b-a))^gamma*(d-c)+c
+        # If gamma is equal to 1, then the line equation is used.
+        # When gamma is not equal to 1, then the transformation is not linear.
 
+        y = (((self.hipercubo - a) / (b - a)) ** gamma) * (d - c) + c
+        return y
 
 if __name__ == '__main__':  
     
     matplotlib.use('TkAgg',force=True)
     if len(sys.argv) == 2:
         hipercubo = Hypercube()
+        hipercubo.Crop(94,528,10,214)
         hipercubo.Load(sys.argv[1])
-        hipercubo.PlotDimLine(150)
-        hipercubo.PlotIMG(150)
+        hipercubo.PlotDimLine(100)
+        hipercubo.PlotIMG(100)
+        hipercubo.imadjust(94,528,10,214)
 
