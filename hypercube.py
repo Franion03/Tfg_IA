@@ -3,6 +3,7 @@ import sys
 import matplotlib
 from matplotlib import pyplot as plt
 import numpy as np
+import cv2
 
 
 class Hypercube:
@@ -19,6 +20,7 @@ class Hypercube:
         self.filename = ''
         self.ext = ''
         self.bindata = None
+        self.bidimensionalHipercube = None
 
     def Load(self, filename):        
         self.dataPath = filename
@@ -52,9 +54,17 @@ class Hypercube:
         plt.title('Visualización de la dimensión {}'.format(dim_a_visualizar))
         plt.colorbar()
         plt.show()
+    # Grafica la imagen de la media de las bandas
+    def PlotIMGBidimensional(self):
+        matriz_a_visualizar = self.bidimensionalHipercube
+        # Mostrar la matriz como una imagen utilizando la función `imshow`
+        plt.imshow(matriz_a_visualizar, cmap='gray')
+        plt.title('Visualización de la media de las bandas')
+        plt.colorbar()
+        plt.show()
     # A function that crops the image to the given dimensions
     def Crop(self, y1, y2, x1, x2):
-        self.hipercubo = self.hipercubo[:, x1:x2, y1:y2]
+        self.hipercubo = self.hipercubo[:, x1:x2, y1:y2].astype(np.uint16)
         self.numPixels = x2 - x1
         self.numLines = y2 - y1
     # A function that adjust color gamma in x image
@@ -70,15 +80,33 @@ class Hypercube:
 
         y = (((self.hipercubo - a) / (b - a)) ** gamma) * (d - c) + c
         return y
+    # A function that select roi in image
+    def selectROI(self):
+        img = cv2.cvtColor(self.hipercubo[:, 100, :].astype(np.uint8), cv2.COLOR_RGB2BGR)
+
+        roi = cv2.selectROI("Selecciona el area", img)
+        self.hipercubo = self.hipercubo[roi[1]:roi[1]+roi[3], :, roi[0]:roi[0]+roi[2]].astype(np.uint16)
+        return roi
+    # A function that makes the average of bands in the hipercube
+    def average(self):
+        self.bidimensionalHipercube = np.mean(self.hipercubo, axis=1,dtype=np.uint16)
+
+
 
 if __name__ == '__main__':  
     
     matplotlib.use('TkAgg',force=True)
     if len(sys.argv) == 2:
         hipercubo = Hypercube()
-        hipercubo.Crop(94,528,10,214)
         hipercubo.Load(sys.argv[1])
-        hipercubo.PlotDimLine(100)
+        hipercubo.Crop(94,528,10,214)
+        # hipercubo.PlotIMG(100)
+        hipercubo.average()
+        # hipercubo.PlotDimLine(100)
+        # hipercubo.PlotIMG(100)
+        # hipercubo.PlotIMGBidimensional()
+        hipercubo.selectROI()
         hipercubo.PlotIMG(100)
-        hipercubo.imadjust(94,528,10,214)
+        print("Done")
+        # hipercubo.imadjust(94,528,10,214)
 

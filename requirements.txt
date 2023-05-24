@@ -2,5 +2,6 @@
 # Usage: pip install -r requirements.txt
 matplotlib
 numpy
+opencv-python
 # struct
 # array
