@@ -4,7 +4,7 @@ import matplotlib
 from matplotlib import pyplot as plt
 import numpy as np
 import cv2
-
+import json
 from segment_anything_meta import Segmenter
 
 
@@ -108,8 +108,11 @@ class Hypercube:
         return returnedmask
     # A function that saves in json the values of the hipercube and assigns a value to the hole image
     def saveValues(self, values, name):
-        with open(name + '.json', 'w') as fp:
-            json.dump(values, fp)
+        array = np.array(values)
+        datos = {'PVC': array.tolist()}
+        json_str = json.dumps(datos)
+        with open(name + '.json', 'a') as fp:
+            json.dump(json_str, fp)
 
 
 
@@ -131,6 +134,7 @@ if __name__ == '__main__':
         image = hipercubo.returnImage()
         mask = segment.segmentRoi(image)
         finalmask = hipercubo.extractValues(mask)
+        hipercubo.saveValues(finalmask, "prueba")
         print("Done")
         # hipercubo.imadjust(94,528,10,214)
 
