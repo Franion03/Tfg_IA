@@ -5,6 +5,8 @@ from matplotlib import pyplot as plt
 import numpy as np
 import cv2
 
+from segment_anything_meta import Segmenter
+
 
 class Hypercube:
     def __init__(self):
@@ -93,7 +95,21 @@ class Hypercube:
     # A function that keeps in csv roi values giveds from the hipercube in actual path
     def saveROI(self, roi):
         np.savetxt(self.basename + ".csv", roi, delimiter=",")
-        
+    
+    def returnImage(self):
+        return cv2.cvtColor(self.hipercubo[:, 100, :].astype(np.uint8), cv2.COLOR_RGB2BGR)
+    # una función que te extraiga los valores de la imagen en una mascara dada
+    def extractValues(self, mask): 
+        returnedmask = []
+        for i in range(len(mask)):
+            for j in range(len(mask[i])):
+                if mask[i][j] == True:
+                    returnedmask.append(self.hipercubo[i, :, j])
+        return returnedmask
+    # A function that saves in json the values of the hipercube and assigns a value to the hole image
+    def saveValues(self, values, name):
+        with open(name + '.json', 'w') as fp:
+            json.dump(values, fp)
 
 
 
@@ -109,8 +125,12 @@ if __name__ == '__main__':
         # hipercubo.PlotDimLine(100)
         # hipercubo.PlotIMG(100)
         # hipercubo.PlotIMGBidimensional()
-        hipercubo.selectROI()
-        hipercubo.PlotIMG(100)
+        # hipercubo.selectROI()
+        # hipercubo.PlotIMG(100)
+        segment = Segmenter("vit_h","sam_vit_h_4b8939.pth")
+        image = hipercubo.returnImage()
+        mask = segment.segmentRoi(image)
+        finalmask = hipercubo.extractValues(mask)
         print("Done")
         # hipercubo.imadjust(94,528,10,214)
 
