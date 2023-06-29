@@ -5,6 +5,7 @@ from matplotlib import pyplot as plt
 import numpy as np
 import cv2
 import json
+import csv
 from segment_anything_meta import Segmenter
 
 
@@ -106,13 +107,20 @@ class Hypercube:
                 if mask[i][j] == True:
                     returnedmask.append(self.hipercubo[i, :, j])
         return returnedmask
-    # A function that saves in json the values of the hipercube and assigns a value to the hole image
+    # A function that saves in csv the values of the hipercube and assigns a value to the hole image
     def saveValues(self, values, name):
         array = np.array(values)
-        datos = {'PVC': array.tolist()}
-        json_str = json.dumps(datos)
-        with open(name + '.json', 'a') as fp:
-            json.dump(json_str, fp)
+        with open(name + '.csv', 'a') as csvfile:
+            spamwriter = csv.writer(csvfile, delimiter=';')
+            # Recorrer las listas de valores y etiquetas
+            spamwriter.writerow(["PVC", array.flatten()])
+
+    def saveValuesDataForColumn(self, values, name):
+        array = np.array(values)
+        with open(name + '.csv', 'a') as csvfile:
+            spamwriter = csv.writer(csvfile, delimiter=';', quoting=csv.QUOTE_MINIMAL)
+            spamwriter.writerow("PVC,".join(array.tolist()))
+
 
 
 

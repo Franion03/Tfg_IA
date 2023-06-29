@@ -29,8 +29,11 @@ class Segmenter:
     def __init__(self, model_type, checkpoint):
         # initialize the model with the given type and checkpoint
         self.model = sam_model_registry[model_type](checkpoint=checkpoint)
+        # device = "cuda"
+        # self.model.to(device=device)
         # create a predictor object
         self.predictor = SamPredictor(self.model)
+        
         self.input_label = np.array([1])
 
     def segment(self, image, prompts):

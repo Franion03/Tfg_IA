@@ -5,6 +5,7 @@ numpy
 opencv-python
 torch
 torchvision
+csv
 git+https://github.com/facebookresearch/segment-anything.git
 # struct
 # array
