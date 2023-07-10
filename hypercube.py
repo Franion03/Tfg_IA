@@ -112,14 +112,9 @@ class Hypercube:
         array = np.array(values)
         with open(name + '.csv', 'a') as csvfile:
             spamwriter = csv.writer(csvfile, delimiter=';')
-            # Recorrer las listas de valores y etiquetas
-            spamwriter.writerow(["PVC", array.flatten()])
-
-    def saveValuesDataForColumn(self, values, name):
-        array = np.array(values)
-        with open(name + '.csv', 'a') as csvfile:
-            spamwriter = csv.writer(csvfile, delimiter=';', quoting=csv.QUOTE_MINIMAL)
-            spamwriter.writerow("PVC,".join(array.tolist()))
+            for  row in array:
+                # write the label and the row as a list
+                spamwriter.writerow(  list(row) + [3])
 
 
 
@@ -142,7 +137,7 @@ if __name__ == '__main__':
         image = hipercubo.returnImage()
         mask = segment.segmentRoi(image)
         finalmask = hipercubo.extractValues(mask)
-        hipercubo.saveValues(finalmask, "prueba")
+        hipercubo.saveValues(finalmask, "pp_pe")
         print("Done")
         # hipercubo.imadjust(94,528,10,214)
 
