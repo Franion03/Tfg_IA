@@ -1,0 +1,36 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        
+        {
+            "args": ["D:\\Hypercubos\\Hypercubos\\ABS"],
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "args": ["1"],
+            "name": "Python: NeuralNetworkEstimator",
+            "type": "python",
+            "request": "launch",
+            "program": "neural_network_Estimator_v3.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "args": [".\\TRAIN",".\\TEST"],
+            "name": "Python: BatchGenerator",
+            "type": "python",
+            "request": "launch",
+            "program": ".\\FileGenerator.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        }
+    ]
+}

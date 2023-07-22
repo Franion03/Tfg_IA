@@ -1,0 +1,13 @@
+# Hipercube requirements
+# Usage: pip install -r requirements.txt
+matplotlib
+numpy
+opencv-python
+torch
+torchvision
+csv
+tensorflow
+pandas
+git+https://github.com/facebookresearch/segment-anything.git
+# struct
+# array
