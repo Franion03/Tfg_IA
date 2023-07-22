@@ -101,7 +101,7 @@ class RegressionHyperModel_2Layers(HyperModel):
                     'dense_activation_1',
                     values=['relu', 'tanh', 'sigmoid'],
                     default='relu'),
-                input_shape=input_shape
+                input_shape=self.input_shape
             )
         
         )
