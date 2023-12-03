@@ -130,3 +130,5 @@ dmypy.json
 # Models
 *.h5
 *.pth
+# Venvss
+hipercubo/
