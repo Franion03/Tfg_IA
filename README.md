@@ -1,10 +1,28 @@
 # Tfg_IA
 
-Certainly! Here's a sample README file for your Python code:
+This is a project where we are going to prove different methods to process different Hyperespectral images
 
-# Hypercube Analysis
+# Data Preparation
 
 This Python code allows you to load and analyze hypercube data.
+
+# Preprocess
+
+Here are the methods used to reduce the noise in the data provided it is in a different folder because it is not necessary for you to use it in order to prove different types of preproccess.
+
+# Classifiers
+
+In this file you will find different types of neural networks which are used to classify the different types of materials. 
+
+you will find this methods:
+
+## CNN
+
+## Multilayer Perceptron
+
+
+
+# Usage
 
 ## Prerequisites
 
@@ -13,6 +31,7 @@ Before running the code, ensure that you have the following dependencies install
 - Python 3.x
 - NumPy
 - Matplotlib
+- Tensorflow
 
 ## Installation
 
@@ -68,5 +87,3 @@ This project is licensed under the MIT License. See the `LICENSE` file for more 
 
 - This code was developed as part of a hypercube analysis project.
 - Thanks to the contributors of NumPy and Matplotlib for their fantastic libraries.
-
-Feel free to customize the README file based on your specific project details and requirements.
