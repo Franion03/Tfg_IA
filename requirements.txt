@@ -5,7 +5,6 @@ numpy
 opencv-python
 torch
 torchvision
-csv
 tensorflow
 pandas
 git+https://github.com/facebookresearch/segment-anything.git
