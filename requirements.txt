@@ -11,5 +11,6 @@ git+https://github.com/facebookresearch/segment-anything.git
 sphinx
 sphinx_rtd_theme
 ghp-import
+scikit-learn
 # struct
 # array
