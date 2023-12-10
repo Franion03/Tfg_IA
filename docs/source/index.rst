@@ -1,20 +1,16 @@
-.. Hyperespectral Image Clasification documentation master file, created by
-   sphinx-quickstart on Sun Dec  3 21:31:48 2023.
+.. Hiperespectral Image Clasification documentation master file, created by
+   sphinx-quickstart on Wed Dec  6 18:34:33 2023.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Hyperespectral Image Clasification's documentation!
+Welcome to Hiperespectral Image Clasification's documentation!
 ==============================================================
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 2
    :caption: Contents:
 
-   preprocess
-   dataPreparation
-   MultilayerPerceptron
-   CNN
-
+   modules
 
 
 Indices and tables

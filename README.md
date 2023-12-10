@@ -2,6 +2,13 @@
 
 This is a project where we are going to prove different methods to process different Hyperespectral images
 
+To activate the venv on windows we should use: 
+.\hipercubo\Scripts\Activate.ps1
+
+For documentation I recomend this video: 
+https://www.youtube.com/watch?v=BWIrhgCAae0&t=227s&ab_channel=LearnProgrammingwithJoel
+
+
 # Data Preparation
 
 This Python code allows you to load and analyze hypercube data.

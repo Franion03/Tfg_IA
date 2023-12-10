@@ -2,6 +2,8 @@ import tensorflow as tf
 import numpy as np
 import glob
 import os
+import sys
+sys.path.insert(0, os.path.abspath('../..'))
 from FileGenerator import BatchGenerator
 
 class MLP:

@@ -11,6 +11,15 @@ import os
 
 #Recibe un spectrum y lo reescala al rango [0..1]
 def SpectrumPreprocessor(spectrum):
+    """
+     Preprocesses a spectrum to make it easier to visualize. Savitzky - Golay filters are applied to the spectrum before scaling.
+     
+     Args:
+     	 spectrum: The spectrum to preprocess. Must be a list of length 1.
+     
+     Returns: 
+     	 A list of length 1 containing the preprocessed spectrum. It is assumed that the spectrum has been filtered
+    """
     spectrum=spectrum[0]
     spectrum=savgol_filter(spectrum, 15,2)
     spectrum=preprocessing.minmax_scale(spectrum)
@@ -20,9 +29,21 @@ def SpectrumPreprocessor(spectrum):
 #Dado un FileDescriptor abierto lee batch_size lineas
 #  Para cada linea elimina el \n final y obtiene los valores con split por ','
 def ReadBatchFromFile(openFileDescriptor,batch_size,separator):
+    """
+     Reads a batch of data from a file. This is a generator function that will be called by the Read () function of the data source.
+     
+     Args:
+     	 openFileDescriptor: An open file descriptor to the file to read
+     	 batch_size: The number of samples to read
+     	 separator: The separatin between samples and labels e. g.
+     
+     Returns: 
+     	 A tenga definidos y yBatch : Numpy arrays containg the xBatch y
+    """
     #Definimos aquí por si el fichero esta vacio que el return tenga definidos los valores de retorno.
     xBatch=np.array([])
     yBatch=np.array([])
+    # El el linea de la linea.
     for l in range(batch_size):
         line= openFileDescriptor.readline()
         if not line:
@@ -60,6 +81,15 @@ def ReadBatchFromFile(openFileDescriptor,batch_size,separator):
 
 
 def BatchGenerator(fileList, batch_size, separator, validation):
+    """
+     Generator for batch files. Iterates over the list of files and yields batches and labels in a generator
+     
+     Args:
+     	 fileList: List of files to process
+     	 batch_size: Size of each batch in bytes ( default 10 )
+     	 separator: Separator between files ( default'' ) e. g.
+     	 validation: True if validation is enabled False if not ( default
+    """
     ixFile=0
     numFiles=len(fileList)
     #print(fileList[0])
@@ -106,6 +136,14 @@ def BatchGenerator(fileList, batch_size, separator, validation):
             break;
 
 def ValidationGenerator(fileList, batch_size, separator):
+    """
+     Generator for validation. This is a generator that yields batches of data and labels from a list of files
+     
+     Args:
+     	 fileList: List of files to process
+     	 batch_size: Batch size in rows and columns ( int )
+     	 separator: Separator between file names ( str ) e. g
+    """
     # print(fileList[0])
     # print("Files to process: {}".format(numFiles))
     for file in fileList:
@@ -144,6 +182,15 @@ def ValidationGenerator(fileList, batch_size, separator):
 
 #FUNCion para calcular el numero de lineas de un CSV
 def FileNumLines (filename):
+    """
+     Count the number of newlines in a file. This is useful for checking the size of a file in order to avoid reading the whole file multiple times.
+     
+     Args:
+     	 filename: name of file to check. Must be a string
+     
+     Returns: 
+     	 number of newlines in
+    """
     chunk = 1024*1024   # Process 1 MB at a time.
     f = np.memmap(filename)
     num_newlines = sum(np.sum(f[i:i+chunk] == ord('\n'))
@@ -153,6 +200,15 @@ def FileNumLines (filename):
 
 
 def FilesNumLines(fileList):
+    """
+     Get the number of lines in a list of files. This is useful for debugging and to determine how many lines are in each file
+     
+     Args:
+     	 fileList: list of files to count
+     
+     Returns: 
+     	 int of total number of lines in each file in the list in the same order as they appeared
+    """
     totalLines=0
     # tik = time.time()
     for file in fileList:
@@ -163,6 +219,15 @@ def FilesNumLines(fileList):
     return totalLines
 
 def SpectrumsCounter(fileList):
+    """
+     Counts the number of spectra in each file and returns the total number of lines. This is useful for debugging
+     
+     Args:
+     	 fileList: List of files to be analysed
+     
+     Returns: 
+     	 Total number of Spectrums in each file ( 1 or 0 if there are no files in the
+    """
     totalLines=0
     # tik=time.time()
     for file in fileList:
@@ -201,4 +266,3 @@ if __name__ == '__main__':
         something = BatchGenerator(filelist, batchsize, ';', validation=False)
         x,y=next(something) 
         print("Train files: {}".format(len(trainFiles)))
-#%%
