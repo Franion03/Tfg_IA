@@ -8,5 +8,6 @@ torchvision
 tensorflow
 pandas
 git+https://github.com/facebookresearch/segment-anything.git
+sphinx
 # struct
 # array
