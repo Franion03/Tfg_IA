@@ -12,5 +12,7 @@ sphinx
 sphinx_rtd_theme
 ghp-import
 scikit-learn
+keras-tuner
+keras
 # struct
 # array
