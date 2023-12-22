@@ -150,8 +150,8 @@ pathSplit = r'.\SPLIT'
 trainPath = r'.\TRAIN'
 testPath = r'.\TEST'
 #definimos las listas de ficheros
-trainFiles= glob.glob(os.path.join(trainPath , "f*.csv"))
-testFiles= glob.glob(os.path.join(testPath , "f*.csv"))
+trainFiles= glob.glob(os.path.join(trainPath , "*.csv"))
+testFiles= glob.glob(os.path.join(testPath , "*.csv"))
 batchsize=1000
 traingenerator = BatchGenerator(trainFiles, batchsize, ';', validation=False)
 testgenerator = BatchGenerator(testFiles, batchsize, ';', validation=False)
