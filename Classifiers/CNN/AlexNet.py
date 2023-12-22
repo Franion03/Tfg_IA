@@ -4,8 +4,6 @@ import sys
 sys.path.insert(0, os.path.abspath('../..'))
 import keras_tuner as kt
 from keras_tuner import HyperModel
-from .utils import load_state_dict_from_url
-from typing import Any
 import glob
 import numpy as np
 from FileGenerator import BatchGenerator
@@ -17,9 +15,6 @@ from sklearn.metrics import  f1_score, precision_score, recall_score,  confusion
 __all__ = ['AlexNet', 'alexnet']
 
 
-model_urls = {
-    'alexnet': 'https://download.pytorch.org/models/alexnet-owt-4df8aa71.pth',
-}
 
 
 class AlexNet(HyperModel):

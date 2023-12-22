@@ -6,7 +6,7 @@
     "configurations": [
         
         {
-            "args": ["D:\\Hypercubos\\Hypercubos\\ABS"],
+            "args": ["C:\\Users\\Fran Quiles\\Downloads\\Hypercubos\\Hypercubos\\ABS"],
             "name": "Python: Current File",
             "type": "python",
             "request": "launch",
