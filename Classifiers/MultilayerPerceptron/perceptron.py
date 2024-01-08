@@ -1,3 +1,4 @@
+import datetime
 import tensorflow as tf
 import keras_tuner as kt
 from keras_tuner import HyperModel
@@ -118,6 +119,9 @@ model1 = tuner_hb1.hypermodel.build(best_hps1)
 best_model = tuner_hb1.get_best_models(num_models=1)[0]
 # Save the entire model
 best_model.save('perceptron.h5')
+log_dir = "logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=1)
+
 history1 = model1.fit(X_train, Y_train, epochs=1000, callbacks=callbacks, validation_split=0.2)
 eval_result1 = model1.evaluate(X_test, Y_test)
 best_model.save('perceptron1.h5')

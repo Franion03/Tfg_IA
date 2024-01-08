@@ -1,3 +1,6 @@
 {
-    "docify.commentService.docstringFormat": "Google"
+    "docify.commentService.docstringFormat": "Google",
+    "python.analysis.extraPaths": [
+        "./dataPreparation"
+    ]
 }

@@ -1,3 +1,4 @@
+import os
 import torch
 import torchvision
 import numpy as np
@@ -28,8 +29,10 @@ def show_box(box, ax):
 
 class Segmenter:
     def __init__(self, model_type, checkpoint):
+        absolute_path = os.path.dirname(__file__)
+        full_path = os.path.join(absolute_path, checkpoint)
         # initialize the model with the given type and checkpoint
-        self.model = sam_model_registry[model_type](checkpoint=checkpoint)
+        self.model = sam_model_registry[model_type](checkpoint=full_path)
         # device = "cuda"
         # self.model.to(device=device)
         # create a predictor object

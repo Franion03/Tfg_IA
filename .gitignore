@@ -130,5 +130,9 @@ dmypy.json
 # Models
 *.h5
 *.pth
-# Venvss
+# Venvs
 hipercubo/
+Hipercubo/
+
+# Trials
+perceptron_categorical/
