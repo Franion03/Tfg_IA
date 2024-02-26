@@ -7,7 +7,8 @@ import glob
 import os
 from FileGenerator import BatchGenerator
 from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score, classification_report, confusion_matrix, ConfusionMatrixDisplay
-
+from time import time
+from tensorflow.python.keras.callbacks import TensorBoard
 class MLP(HyperModel):
     def __init__(self, input_size, output_size):
         self.input_size = input_size
@@ -54,8 +55,8 @@ class MLP(HyperModel):
 
 path = r'.'
 pathSplit = r'.\SPLIT'
-trainPath = r'.\TRAIN'
-testPath = r'.\TEST'
+trainPath = r'C:\Users\Fran\Projects\Tfg_IA\Classifiers\MultilayerPerceptron\TRAIN'
+testPath = r'C:\Users\Fran\Projects\Tfg_IA\Classifiers\MultilayerPerceptron\TEST'
 #definimos las listas de ficheros
 trainFiles= glob.glob(os.path.join(trainPath , "f*.csv"))
 testFiles= glob.glob(os.path.join(testPath , "f*.csv"))
@@ -95,6 +96,9 @@ Y_test = np.concatenate(Y_test_list)
 Y_train = tf.keras.utils.to_categorical(Y_train)
 Y_test = tf.keras.utils.to_categorical(Y_test)
 
+# Tensorboard part
+tensorboard = TensorBoard(log_dir="logs/{}".format(time()))
+
 # Create an instance of the MLP class, train it, and make predictions
 mlp = MLP(input_size=len(X_train[0]), output_size=Y_train.shape[1])
 tuner_hb1 = kt.BayesianOptimization(
@@ -108,11 +112,17 @@ callbacks = [
                                   mode='min',
                                   patience=10,
                                   verbose=1,
-                                  restore_best_weights=True)
+                                  restore_best_weights=True),
+                                  tensorboard
 ]
-
+hist_callback = tf.keras.callbacks.TensorBoard(
+    log_dir="logs/",
+    histogram_freq=1,
+    embeddings_freq=1,
+    write_graph=True,
+    update_freq='batch')
 stop_early = tf.keras.callbacks.EarlyStopping(monitor='val_recall', patience=10)
-tuner_hb1.search(X_train, Y_train, epochs=2000, validation_split=0.2, callbacks=[stop_early], verbose=1)
+tuner_hb1.search(X_train, Y_train, epochs=2000, validation_split=0.2, callbacks=[stop_early,hist_callback], verbose=1)
 tuner_hb1.results_summary()
 best_hps1=tuner_hb1.get_best_hyperparameters(num_trials=1)[0]
 model1 = tuner_hb1.hypermodel.build(best_hps1)
