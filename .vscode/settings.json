@@ -2,5 +2,6 @@
     "docify.commentService.docstringFormat": "Google",
     "python.analysis.extraPaths": [
         "./dataPreparation"
-    ]
+    ],
+    "git.ignoreLimitWarning": true
 }
