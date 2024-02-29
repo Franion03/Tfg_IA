@@ -135,5 +135,5 @@ hipercubo/
 Hipercubo/
 
 # Trials
-Classifiers/MultilayerPerceptron/perceptron_categorical/
-Classifiers/MultilayerPerceptron/logs/
+./Classifiers/MultilayerPerceptron/perceptron_categorical/
+./Classifiers/MultilayerPerceptron/logs/
