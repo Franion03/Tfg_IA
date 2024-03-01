@@ -14,5 +14,6 @@ ghp-import
 scikit-learn
 keras-tuner
 keras
+ipykernel
 # struct
 # array

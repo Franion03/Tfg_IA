@@ -1,9 +1,20 @@
 # Tfg_IA
 
+First Create venv:
+
+python -m venv /path/to/new/virtual/environment
+
+
 This is a project where we are going to prove different methods to process different Hyperespectral images
 
 To activate the venv on windows we should use: 
-.\hipercubo\Scripts\Activate.ps1
+.\hipercubo\Scripts\Activate.ps1 (my case)
+
+now run:
+pip install -r requirements.txt
+
+Once you have this done you are able to run the colab  notebooks where you can interact with the hole project.
+
 
 For documentation I recomend this video: 
 https://www.youtube.com/watch?v=BWIrhgCAae0&t=227s&ab_channel=LearnProgrammingwithJoel
