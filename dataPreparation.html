@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dataPreparation package &mdash; Hiperespectral Image Clasification 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8d563738"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="preprocess package" href="preprocess.html" />
+    <link rel="prev" title="Tfg_IA" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Hiperespectral Image Clasification
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Tfg_IA</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">dataPreparation package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-dataPreparation.FileGenerator">dataPreparation.FileGenerator module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dataPreparation.FileGenerator.BatchGenerator"><code class="docutils literal notranslate"><span class="pre">BatchGenerator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataPreparation.FileGenerator.FileNumLines"><code class="docutils literal notranslate"><span class="pre">FileNumLines()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataPreparation.FileGenerator.FilesNumLines"><code class="docutils literal notranslate"><span class="pre">FilesNumLines()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataPreparation.FileGenerator.ReadBatchFromFile"><code class="docutils literal notranslate"><span class="pre">ReadBatchFromFile()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataPreparation.FileGenerator.SpectrumPreprocessor"><code class="docutils literal notranslate"><span class="pre">SpectrumPreprocessor()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataPreparation.FileGenerator.SpectrumsCounter"><code class="docutils literal notranslate"><span class="pre">SpectrumsCounter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataPreparation.FileGenerator.ValidationGenerator"><code class="docutils literal notranslate"><span class="pre">ValidationGenerator()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#datapreparation-hypercube-module">dataPreparation.hypercube module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-dataPreparation.ponit_selector">dataPreparation.ponit_selector module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dataPreparation.ponit_selector.PointSelector"><code class="docutils literal notranslate"><span class="pre">PointSelector</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#datapreparation-segment-anything-meta-module">dataPreparation.segment_anything_meta module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-dataPreparation">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="preprocess.html">preprocess package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CNN.html">CNN package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MultilayerPerceptron.html">MultilayerPerceptron package</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Hiperespectral Image Clasification</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">Tfg_IA</a></li>
+      <li class="breadcrumb-item active">dataPreparation package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/dataPreparation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="datapreparation-package">
+<h1>dataPreparation package<a class="headerlink" href="#datapreparation-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-dataPreparation.FileGenerator">
+<span id="datapreparation-filegenerator-module"></span><h2>dataPreparation.FileGenerator module<a class="headerlink" href="#module-dataPreparation.FileGenerator" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="dataPreparation.FileGenerator.BatchGenerator">
+<span class="sig-prename descclassname"><span class="pre">dataPreparation.FileGenerator.</span></span><span class="sig-name descname"><span class="pre">BatchGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fileList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validation</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dataPreparation.FileGenerator.BatchGenerator" title="Link to this definition"></a></dt>
+<dd><p>Generator for batch files. Iterates over the list of files and yields batches and labels in a generator</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fileList</strong> – List of files to process</p></li>
+<li><p><strong>batch_size</strong> – Size of each batch in bytes ( default 10 )</p></li>
+<li><p><strong>separator</strong> – Separator between files ( default’’ ) e. g.</p></li>
+<li><p><strong>validation</strong> – True if validation is enabled False if not ( default</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataPreparation.FileGenerator.FileNumLines">
+<span class="sig-prename descclassname"><span class="pre">dataPreparation.FileGenerator.</span></span><span class="sig-name descname"><span class="pre">FileNumLines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dataPreparation.FileGenerator.FileNumLines" title="Link to this definition"></a></dt>
+<dd><p>Count the number of newlines in a file. This is useful for checking the size of a file in order to avoid reading the whole file multiple times.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> – name of file to check. Must be a string</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>number of newlines in</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataPreparation.FileGenerator.FilesNumLines">
+<span class="sig-prename descclassname"><span class="pre">dataPreparation.FileGenerator.</span></span><span class="sig-name descname"><span class="pre">FilesNumLines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fileList</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dataPreparation.FileGenerator.FilesNumLines" title="Link to this definition"></a></dt>
+<dd><p>Get the number of lines in a list of files. This is useful for debugging and to determine how many lines are in each file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>fileList</strong> – list of files to count</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>int of total number of lines in each file in the list in the same order as they appeared</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataPreparation.FileGenerator.ReadBatchFromFile">
+<span class="sig-prename descclassname"><span class="pre">dataPreparation.FileGenerator.</span></span><span class="sig-name descname"><span class="pre">ReadBatchFromFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">openFileDescriptor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dataPreparation.FileGenerator.ReadBatchFromFile" title="Link to this definition"></a></dt>
+<dd><p>Reads a batch of data from a file. This is a generator function that will be called by the Read () function of the data source.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>openFileDescriptor</strong> – An open file descriptor to the file to read</p></li>
+<li><p><strong>batch_size</strong> – The number of samples to read</p></li>
+<li><p><strong>separator</strong> – The separatin between samples and labels e. g.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Numpy arrays containg the xBatch y</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A tenga definidos y yBatch</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataPreparation.FileGenerator.SpectrumPreprocessor">
+<span class="sig-prename descclassname"><span class="pre">dataPreparation.FileGenerator.</span></span><span class="sig-name descname"><span class="pre">SpectrumPreprocessor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spectrum</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dataPreparation.FileGenerator.SpectrumPreprocessor" title="Link to this definition"></a></dt>
+<dd><p>Preprocesses a spectrum to make it easier to visualize. Savitzky - Golay filters are applied to the spectrum before scaling.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>spectrum</strong> – The spectrum to preprocess. Must be a list of length 1.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of length 1 containing the preprocessed spectrum. It is assumed that the spectrum has been filtered</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataPreparation.FileGenerator.SpectrumsCounter">
+<span class="sig-prename descclassname"><span class="pre">dataPreparation.FileGenerator.</span></span><span class="sig-name descname"><span class="pre">SpectrumsCounter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fileList</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dataPreparation.FileGenerator.SpectrumsCounter" title="Link to this definition"></a></dt>
+<dd><p>Counts the number of spectra in each file and returns the total number of lines. This is useful for debugging</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>fileList</strong> – List of files to be analysed</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Total number of Spectrums in each file ( 1 or 0 if there are no files in the</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataPreparation.FileGenerator.ValidationGenerator">
+<span class="sig-prename descclassname"><span class="pre">dataPreparation.FileGenerator.</span></span><span class="sig-name descname"><span class="pre">ValidationGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fileList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dataPreparation.FileGenerator.ValidationGenerator" title="Link to this definition"></a></dt>
+<dd><p>Generator for validation. This is a generator that yields batches of data and labels from a list of files</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fileList</strong> – List of files to process</p></li>
+<li><p><strong>batch_size</strong> – Batch size in rows and columns ( int )</p></li>
+<li><p><strong>separator</strong> – Separator between file names ( str ) e. g</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="datapreparation-hypercube-module">
+<h2>dataPreparation.hypercube module<a class="headerlink" href="#datapreparation-hypercube-module" title="Link to this heading"></a></h2>
+</section>
+<section id="module-dataPreparation.ponit_selector">
+<span id="datapreparation-ponit-selector-module"></span><h2>dataPreparation.ponit_selector module<a class="headerlink" href="#module-dataPreparation.ponit_selector" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="dataPreparation.ponit_selector.PointSelector">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dataPreparation.ponit_selector.</span></span><span class="sig-name descname"><span class="pre">PointSelector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dataPreparation.ponit_selector.PointSelector" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dataPreparation.ponit_selector.PointSelector.mouse_click">
+<span class="sig-name descname"><span class="pre">mouse_click</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dataPreparation.ponit_selector.PointSelector.mouse_click" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dataPreparation.ponit_selector.PointSelector.show_and_wait">
+<span class="sig-name descname"><span class="pre">show_and_wait</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dataPreparation.ponit_selector.PointSelector.show_and_wait" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="datapreparation-segment-anything-meta-module">
+<h2>dataPreparation.segment_anything_meta module<a class="headerlink" href="#datapreparation-segment-anything-meta-module" title="Link to this heading"></a></h2>
+</section>
+<section id="module-dataPreparation">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dataPreparation" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules.html" class="btn btn-neutral float-left" title="Tfg_IA" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="preprocess.html" class="btn btn-neutral float-right" title="preprocess package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Francisco Javier Quiles Ruiz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
