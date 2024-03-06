@@ -31,8 +31,9 @@ def pca(hipercubo,varianza = None, componentes=10):
     We have to specify the number of principal components to keep, which is a hyperparameter of the PCA algorithm.
     """
     dataImagen = hipercubo.hipercubo.copy()
+    r, d, c  = dataImagen .shape
     if varianza != None :
-        imageTemp = dataImagen.reshape((dataImagen.shape[1],dataImagen.shape[0]*dataImagen.shape[2])).T
+        imageTemp = dataImagen.reshape((d,r*c)).T
         pca = PCA()
         pca.fit(imageTemp)
         imageTemp = pca.transform(imageTemp)
@@ -45,17 +46,17 @@ def pca(hipercubo,varianza = None, componentes=10):
                 break
             else:
                 num_componentes += 1
-        imageTemp = imageTemp.reshape( (dataImagen.shape[1], dataImagen.shape[2],dataImagen.shape[0]) )
-        imagePCA = np.zeros( (num_componentes, dataImagen.shape[1], dataImagen.shape[2]) )
+        imageTemp = imageTemp.reshape( (r, c,d) )
+        imagePCA = np.zeros( (num_componentes, r, c) )
         for i in range(imagePCA.shape[0]):
             imagePCA[i] = imageTemp[:,:,i]
     if componentes != None:
-        imageTemp = dataImagen.reshape((dataImagen.shape[0],dataImagen.shape[1]*dataImagen.shape[2])).T
+        imageTemp = dataImagen.reshape((d,r*c)).T
         c_pca = PCA(n_components=componentes)
         c_pca.fit(imageTemp)
         imageTemp = c_pca.transform(imageTemp)
-        imageTemp = imageTemp.reshape( (dataImagen.shape[1], dataImagen.shape[2],imageTemp.shape[1]) )
-        imagePCA = np.zeros( (componentes, dataImagen.shape[1], dataImagen.shape[2]) )
+        imageTemp = imageTemp.reshape( (r, c,imageTemp.shape[1]) )
+        imagePCA = np.zeros( (componentes, r, c) )
         for i in range(imagePCA.shape[0]):
             imagePCA[i] = imageTemp[:,:,i]
     return imagePCA
@@ -68,7 +69,7 @@ def standardNormalizationVariate(hipercubo):
     """
     normalized_datas = []
     # Calcular la media de cada banda espectral
-    for i in range(hipercubo.numBands):
+    for i in range(hipercubo.hipercubo.shape[1]):
         media = np.mean(hipercubo.hipercubo[:, i, :])
     # Calcular la desviación estándar de cada banda espectral
         desviacion_estandar = np.std(hipercubo.hipercubo[:, i, :])
@@ -94,7 +95,7 @@ def minmaxnormalization(hipercubo):
     Min-max normalization is useful to remove the effects of different illumination conditions and to highlight the spectral differences between different pixels.
     """
     minmax_normalized_datas = []
-    for i in range(hipercubo.numBands):
+    for i in range(hipercubo.hipercubo.shape[1]):
     # Calcular el mínimo de cada banda espectral
         minimos = np.min(hipercubo.hipercubo[:, i, :])
 
@@ -114,7 +115,7 @@ def msc(hypercube):
     MSC is useful to remove the effects of different illumination conditions and to highlight the spectral differences between different pixels.
     """
     normalized_hypercubes = []
-    for i in range(hypercube.numBands):
+    for i in range(hypercube.shape[1]):
         # Calcular la media de cada banda espectral
         mean = np.mean(hypercube.hypercube[:, i, :])
         # Normalizar cada banda dividiéndola por la banda media
@@ -132,7 +133,7 @@ def emsc(hypercube):
     EMSC is useful to remove the effects of different illumination conditions and to highlight the spectral differences between different pixels.
     """
     normalized_hypercubes = []
-    for i in range(hypercube.numBands):
+    for i in range(hypercube.shape[1]):
         # Calcular la media de cada banda espectral
         mean = np.mean(hypercube.hypercube[:, i, :])
         # Calcular la desviación estándar de cada banda espectral
@@ -151,7 +152,7 @@ def assymetricLeastSquares(hypercubo):
     ALS is useful to remove the effects of different illumination conditions and to highlight the spectral differences between different pixels.
     """
     normalized_hypercubes = []
-    for i in range(hypercubo.numBands):
+    for i in range(hypercubo.shape[1]):
         # Calcular la media de cada banda espectral
         mean = np.mean(hypercubo.hypercube[:, i, :])
         # Calcular la desviación estándar de cada banda espectral

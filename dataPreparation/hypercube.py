@@ -27,6 +27,7 @@ class Hypercube:
         self.bindata = None
         self.bidimensionalHipercube = None
         self.medianHipercube = None 
+        self.RGBHipercube = None
 
     def Load(self, filename):        
         self.dataPath = filename
@@ -65,8 +66,15 @@ class Hypercube:
         matriz_a_visualizar = self.bidimensionalHipercube
         # Mostrar la matriz como una imagen utilizando la función `imshow`
         plt.imshow(matriz_a_visualizar, cmap='gray')
-        plt.title('Visualización de la media de las bandas')
+        plt.title('RGB Image')
         plt.colorbar()
+        plt.show()
+    # Grafica la imagen de la media de las bandas
+    def PlotIMGHyperespectral(self,image):
+        # Mostrar la matriz como una imagen utilizando la función `imshow`
+        plt.imshow(image,cmap = 'nipy_spectral')
+        plt.title('Visualización de la imagen ')
+        plt.axis('off')
         plt.show()
     # A function that crops the image to the given dimensions
     def Crop(self, y1, y2, x1, x2):
@@ -102,11 +110,22 @@ class Hypercube:
     # A function that keeps in csv roi values giveds from the hipercube in actual path
     def saveROI(self, roi):
         np.savetxt(self.basename + ".csv", roi, delimiter=",")
-    
+
+    def plotspectres(self):
+        for i in range(0, self.hipercubo.shape[0]):
+            for j in range(0, self.hipercubo.shape[2]):
+                plt.plot(self.hipercubo[i, :, j])
+        plt.show()  
+
+    def plotBidimensionalHipercubeSpectres(self):
+        for i in range(0, self.hipercubo.shape[0]):
+            plt.plot(self.bidimensionalHipercube[i,:])
+        plt.show() 
+
     def returnImage(self):
-        return cv2.cvtColor(self.hipercubo[:, 100, :].astype(np.uint8), cv2.COLOR_RGB2BGR)
+        return cv2.cvtColor(self.bidimensionalHipercube.astype(np.uint8), cv2.COLOR_RGB2BGR)
     # una función que te extraiga los valores de la imagen en una mascara dada
-    def extractValues(self, mask): 
+    def extractValues(self, mask, label): 
         returnedmask = []
         maskLabeled = np.zeros_like(mask)
         for i in range(len(mask)):
@@ -144,65 +163,3 @@ class Hypercube:
         print("2- Cree una identifique objetos")
         return int(input("Introduce una opción: "))
     
-
-
-
-if __name__ == '__main__':  
-    
-    matplotlib.use('TkAgg',force=True) 
-    if len(sys.argv) == 2:
-        while True:
-            option = Hypercube().ploteMenu()
-            all_files = glob.glob(os.path.join(sys.argv[1] , "*.bin"))
-            maxValue = 0
-            minValue = 1000
-            # for filename in all_files:
-            #     hipercubo = Hypercube()
-            #     hipercubo.Load(filename)
-            #     hipercubo.median()
-            #     if maxValue < np.max(hipercubo.medianHipercube):
-            #         maxValue = np.max(hipercubo.medianHipercube)
-            #     if minValue > np.min(hipercubo.medianHipercube): 
-            #         minValue = np.min(hipercubo.medianHipercube)
-            if option == 1:
-                for filename in all_files:
-                    hipercubo = Hypercube()
-                    hipercubo.Load(filename)
-                    hipercubo.Crop(94,528,10,214)
-                    # hipercubo.PlotIMG(100)
-                    hipercubo.average()
-                    # hipercubo.PlotDimLine(100)
-                    # hipercubo.PlotIMG(100)
-                    # hipercubo.PlotIMGBidimensional()
-                    # hipercubo.selectROI()
-                    # hipercubo.PlotIMG(100)
-                    segment = Segmenter("vit_h",r"sam_vit_h_4b8939.pth")
-                    image = hipercubo.returnImage()
-                    mask = segment.segmentRoi(image)
-                    finalmask,maskLabeled = hipercubo.extractValues(mask)
-                    hipercubo.saveValues(finalmask, "pp_pe")
-                    hipercubo.saveMask(maskLabeled,filename)
-                    print("Done")
-                    # hipercubo.imadjust(94,528,10,214)
-
-            elif option == 2:
-                counter = 0
-                for filename in all_files:
-                    hipercubo = Hypercube()
-                    hipercubo.Load(filename)
-                    hipercubo.Crop(94,528,10,214)
-                    # hipercubo.PlotIMG(100)
-                    hipercubo.average()
-                    # hipercubo.PlotDimLine(100)
-                    # hipercubo.PlotIMG(100)
-                    # hipercubo.PlotIMGBidimensional()
-                    # hipercubo.selectROI()
-                    # hipercubo.PlotIMG(100)
-                    segment = SquareDetector(200)
-                    image = hipercubo.returnImage()
-                    mask = segment.selectSquares(image)
-                    finalmask,maskLabeled = hipercubo.extractSquares(mask)
-                    for i in range(len(finalmask)):
-                        hipercubo.saveValues(finalmask[i], r"C:\Users\Fran Quiles\Documents\Projects\Tfg_IA\Classifiers\CNN\SPLIT\pp_pe"+ str(counter) + str(i))
-                    print("Done")
-                    counter += 1
